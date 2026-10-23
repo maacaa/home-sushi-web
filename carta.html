@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carta del buffet libre · HOME SUSHI Benidorm</title>
+<meta name="description" content="Carta completa del buffet libre a la carta de Home Sushi Benidorm: nigiri, maki, sopas, platos especiales, teppanyaki y postres.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f3eee3;
+  --paper2:#faf7ef;
+  --ink:#1a160f;
+  --ink2:#453c2e;
+  --muted:#8a7d67;
+  --gold:#a8842e;
+  --hair:rgba(26,22,15,.14);
+  --disp:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  --mono:ui-monospace,'Cascadia Mono','Segoe UI Mono',Consolas,monospace;
+  --top:116px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+
+/* CABECERA FIJA: marca + idioma, y debajo las categorías */
+header{position:sticky;top:0;z-index:50;background:rgba(243,238,227,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
+.brand img{background:var(--ink);padding:3px 5px;height:24px}
+.lang-sw{position:relative;width:76px;height:30px;flex:none;background:none;border:1px solid rgba(168,132,46,.6);border-radius:99px;padding:0;cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.12em}
+.lang-sw .knob{position:absolute;top:2px;left:3px;width:34px;height:24px;border-radius:99px;background:var(--gold);transition:transform .28s cubic-bezier(.4,0,.2,1)}
+.lang-sw.en .knob{transform:translateX(35px)}
+.lang-sw .lab{position:absolute;top:0;height:100%;width:38px;display:grid;place-items:center;line-height:1}
+.lang-sw .l-es{left:1px;color:#fff}
+.lang-sw .l-en{left:36px;color:var(--muted)}
+.lang-sw.en .l-es{color:var(--muted)}
+.lang-sw.en .l-en{color:#fff}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:0 20px 12px;max-width:760px;margin:0 auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;border:1px solid var(--hair);border-radius:99px;color:var(--ink2);background:var(--paper2);transition:.2s}
+.chips a.on{background:var(--ink);border-color:var(--ink);color:var(--paper2)}
+
+/* PORTADA */
+.intro{padding:36px 0 8px}
+.eyebrow{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+h1{font-family:var(--disp);font-weight:500;font-size:clamp(40px,10vw,60px);line-height:1;margin:12px 0 18px}
+h1 em{font-style:italic;color:var(--gold)}
+.info{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);border-top:1px solid var(--hair)}
+.info .r{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--hair)}
+.info b{font-weight:600;color:var(--ink2);text-align:right}
+.info .note{padding:10px 0;border-bottom:1px solid var(--hair);line-height:1.5}
+html[lang=es] [data-only=en],html[lang=en] [data-only=es]{display:none}
+
+/* CATEGORÍAS */
+.cat{padding-top:34px;scroll-margin-top:var(--top)}
+.cat h2{display:flex;align-items:baseline;gap:14px;font-family:var(--disp);font-weight:500;font-size:30px;line-height:1.15;padding-bottom:10px;border-bottom:1px solid var(--ink)}
+.cat h2 .rn{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--gold);min-width:20px}
+.cat ul{list-style:none}
+.cat li{font-family:var(--disp);font-size:21px;line-height:1.3;color:var(--ink2);padding:11px 0 11px 34px;border-bottom:1px solid var(--hair)}
+
+/* PIE */
+.foot{padding:40px 0 56px}
+.foot p{font-family:var(--mono);font-size:11.5px;color:var(--muted);line-height:1.6}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+.btn{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:13px 20px;border:1px solid;display:inline-block;transition:.25s}
+.btn-gold{background:var(--gold);border-color:var(--gold);color:var(--paper2)}
+.btn-gold:hover{background:#8c6e23;border-color:#8c6e23}
+.btn-line{border-color:var(--ink);color:var(--ink)}
+.btn-line:hover{border-color:var(--gold);color:var(--gold)}
+
+@media(min-width:700px){
+  .cat ul{columns:2;column-gap:36px}
+  .cat li{break-inside:avoid;padding-left:0}
+}
+@media(max-width:380px){
+  .brand span{display:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="index.html"><img src="assets/logo.png" alt="Home Sushi"><span>Home Sushi · Benidorm</span></a>
+    <button class="lang-sw" id="langBtn" role="switch" aria-checked="false" aria-label="Cambiar idioma a inglés">
+      <span class="knob"></span><span class="lab l-es">ES</span><span class="lab l-en">EN</span>
+    </button>
+  </div>
+  <nav class="chips" id="chips" aria-label="Categorías">
+      <a href="#nigiri" data-en="Nigiri">Nigiri</a>
+      <a href="#maki" data-en="Maki">Maki</a>
+      <a href="#sopas" data-en="Soups">Sopas</a>
+      <a href="#arroz" data-en="Rice &amp; noodles">Arroz y tallarines</a>
+      <a href="#especiales" data-en="Specials">Especiales</a>
+      <a href="#horneados" data-en="Oven-baked">Horneados</a>
+      <a href="#teppanyaki" data-en="Teppanyaki">Teppanyaki</a>
+      <a href="#postres" data-en="Desserts">Postres</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div class="intro">
+    <p class="eyebrow" data-en="All you can eat · à la carte">Buffet libre · a la carta</p>
+    <h1 data-en-html="All you can eat &lt;em&gt;menu&lt;/em&gt;">Carta del <em>buffet libre</em></h1>
+
+    <div class="info" data-only="es">
+      <div class="r"><span>Dirección</span><b>C. Ibiza 9 · 03503 Benidorm</b></div>
+      <div class="r"><span>Horario</span><b>Todos los días<br>12:00–16:00 y 18:00–00:00</b></div>
+      <div class="r"><span>Teléfono</span><b><a href="tel:+34622258858">622 25 88 58</a></b></div>
+    </div>
+    <div class="info" data-only="en">
+      <div class="r"><span>Monday to Friday · midday</span><b>17,95 €</b></div>
+      <div class="r"><span>Friday night, weekends &amp; holidays</span><b>18,95 €</b></div>
+      <div class="r"><span>Kids · 1 to 1.20 m</span><b>8,95 €</b></div>
+      <p class="note">Soft drinks: pay for your first drink and we refill the rest for free (alcoholic drinks must be paid).</p>
+      <div class="r"><span>Address</span><b>C. Ibiza 9 · Edificio Gemelos IV, local 2<br>03503 Benidorm (Alicante)</b></div>
+      <div class="r"><span>Opening hours</span><b>Every day<br>11:30–16:00 and 18:00–00:00</b></div>
+      <div class="r"><span>Food to take away</span><b><a href="tel:+34865801560">865 801 560</a></b></div>
+    </div>
+  </div>
+
+  <section class="cat" id="nigiri">
+      <h2><span class="rn">Ⅰ</span><span data-en="Nigiri and gunkan">Nigiri y gunkan</span></h2>
+      <ul>
+        <li data-en="Salmon">Salmón</li>
+        <li data-en="Tuna">Atún</li>
+        <li data-en="Prawn">Langostino</li>
+        <li data-en="Octopus">Pulpo</li>
+        <li data-en="Salmon Tartar">Tapa de salmón</li>
+        <li data-en="Crab Stick">Piel de cangrejo</li>
+        <li data-en="Lobster Tail">Látigo de langosta</li>
+        <li data-en="Unagi (eel)">Anguila frita</li>
+        <li data-en="Butterfish Montadito">Pie Montadito Butterfish</li>
+        <li data-en="Salmon Gunkan">Gunkan de salmón</li>
+        <li data-en="Tuna Gunkan">Gunkan de atún</li>
+        <li data-en="Seafood Gunkan">Gunkan de algas</li>
+      </ul>
+    </section>
+  <section class="cat" id="maki">
+      <h2><span class="rn">Ⅱ</span><span data-en="Maki (4 pcs) and temaki (1 pc)">Maki (4 uds) y temaki (1 ud)</span></h2>
+      <ul>
+        <li data-en="Salmon Maki">Makis de salmón</li>
+        <li data-en="Tuna Maki">Makis de atún</li>
+        <li data-en="Cucumber Maki">Makis de pepino</li>
+        <li data-en="Crabstick Maki">Makis de cangrejo</li>
+        <li data-en="Omelette Maki">Makis de tortilla</li>
+        <li data-en="Avocado Maki">Makis de aguacate</li>
+        <li data-en="Salmon and Vegetable Big Roll">Gran roll de salmón y verduras</li>
+        <li data-en="Crab and Vegetable Big Roll">Gran roll de cangrejo y verduras</li>
+        <li data-en="Avocado, Cucumber and Crab">Aguacate, pepino y cangrejo</li>
+        <li data-en="Tuna with Wasabi">Atún con wasabi</li>
+        <li data-en="Avocado with Salmon">Aguacate con salmón</li>
+        <li data-en="Avocado with Tuna">Aguacate con atún</li>
+        <li data-en="Veggie Roll">Rollo vegetariano</li>
+        <li data-en="Spicy Salmon Roll">Rollo salmón picante</li>
+        <li data-en="Fried Shrimp Roll">Rollo gambas fritas</li>
+        <li data-en="Roast Chicken Roll with Cucumber">Rollo pollo asado con pepino</li>
+      </ul>
+    </section>
+  <section class="cat" id="sopas">
+      <h2><span class="rn">Ⅲ</span><span data-en="Soups">Sopas</span></h2>
+      <ul>
+        <li data-en="Hot and Sour Soup">Sopa agripicante</li>
+        <li data-en="Miso Soup">Sopa de miso</li>
+        <li data-en="Chicken and Sweet Corn Soup">Sopa de pollo con maíz</li>
+      </ul>
+    </section>
+  <section class="cat" id="arroz">
+      <h2><span class="rn">Ⅳ</span><span data-en="Rice, noodles and salads">Arroz, tallarines y ensaladas</span></h2>
+      <ul>
+        <li data-en="House Stew">Estofado de la casa</li>
+        <li data-en="Edamame">Edamame</li>
+        <li data-en="Seaweed Salad">Ensalada de algas</li>
+        <li data-en="Fried Noodles with Vegetables">Fideos fritos con verduras</li>
+        <li data-en="Singapore Chow Mein">Tallarines de Singapur</li>
+        <li data-en="Korean Rice">Arroz coreano</li>
+        <li data-en="Pad Thai Noodles">Tallarines Pad Thai</li>
+        <li data-en="Dumplings">Empanada de carne</li>
+      </ul>
+    </section>
+  <section class="cat" id="especiales">
+      <h2><span class="rn">Ⅴ</span><span data-en="Special dishes">Platos especiales</span></h2>
+      <ul>
+        <li data-en="Mixed Vegetables">Verduras mixtas</li>
+        <li data-en="Beef with Bamboo and Mushrooms">Ternera con bambú y setas</li>
+        <li data-en="Beef with Oyster Sauce">Ternera con salsa de ostras</li>
+        <li data-en="Crispy Beef with Sweet and Sour Sauce">Ternera crujiente con salsa agripicante</li>
+        <li data-en="Grilled Chicken">Pollo a la plancha</li>
+        <li data-en="Chicken with Lemon">Pollo con limón</li>
+        <li data-en="Chicken with Pineapple">Pollo con piña</li>
+        <li data-en="Chicken Curry">Pollo con curry</li>
+        <li data-en="Garlic Prawns">Gambas al ajillo</li>
+        <li data-en="Chicken with Almonds">Pollo con almendras</li>
+        <li data-en="Gong Bao Chicken">Pollo Gong Bao</li>
+        <li data-en="Japanese Style Beef">Ternera japonesa</li>
+        <li data-en="Japanese Style Chicken">Pollo japonés</li>
+        <li data-en="Sichuan Style Chicken">Pollo Sichuan</li>
+        <li data-en="Sichuan Style Beef">Ternera Sichuan</li>
+        <li data-en="Sichuan Style Prawns">Gambas Sichuan</li>
+        <li data-en="Sizzling Beef">Ternera sizzling</li>
+        <li data-en="Sizzling Chicken">Pollo sizzling</li>
+      </ul>
+    </section>
+  <section class="cat" id="horneados">
+      <h2><span class="rn">Ⅵ</span><span data-en="Oven-baked dishes">Platos horneados</span></h2>
+      <ul>
+        <li data-en="Fried Cheese">Queso frito</li>
+        <li data-en="Crab Thigh">Muslitos de cangrejo</li>
+        <li data-en="Japanese Roll">Rollitos japoneses</li>
+        <li data-en="Spring Roll">Rollo de primavera</li>
+        <li data-en="Chicken Wings">Alitas de pollo</li>
+        <li data-en="Duck Rolls">Rollo de pato</li>
+        <li data-en="Peking Duck">Pato Pekín</li>
+        <li data-en="Chips">Patatas fritas</li>
+        <li data-en="Pork Skewer">Pincho de cerdo</li>
+      </ul>
+    </section>
+  <section class="cat" id="teppanyaki">
+      <h2><span class="rn">Ⅶ</span><span data-en="Teppanyaki · griddled">Teppanyaki · a la plancha</span></h2>
+      <ul>
+        <li data-en="Mushrooms">Champiñones</li>
+        <li data-en="Zucchini">Calabacín</li>
+        <li data-en="Eggplant">Berenjena</li>
+        <li data-en="Broccoli">Brócoli</li>
+        <li data-en="Beef Sirloin">Lomo de ternera</li>
+        <li data-en="Thai Chicken Skewer">Pincho de pollo tailandés</li>
+        <li data-en="Mussels">Mejillones</li>
+        <li data-en="Baby Squid">Chipirones</li>
+        <li data-en="Mushrooms">Setas</li>
+        <li data-en="Shrimps">Gambas</li>
+        <li data-en="Prawns">Langostinos</li>
+        <li data-en="Red Shrimps">Gambas rojas</li>
+        <li data-en="Pork Spare Ribs">Costilla de cerdo</li>
+        <li data-en="Salmon">Salmón</li>
+        <li data-en="Japanese Bread">Pan japonés</li>
+        <li data-en="Tuna">Atún</li>
+        <li data-en="Asparagus">Espárragos</li>
+        <li data-en="Lamb Chops">Chuletas de cordero</li>
+        <li data-en="Clams">Almejas</li>
+        <li data-en="Pork and Crab Xiao Long Bao">Xiao Long Bao de cerdo y cangrejo</li>
+        <li data-en="Shrimps and Bamboo Xiao Long Bao">Xiao Long Bao de gambas y bambú</li>
+        <li data-en="Pork Sha Mai">Sha mai de lomo de cerdo</li>
+      </ul>
+    </section>
+  <section class="cat" id="postres">
+      <h2><span class="rn">Ⅷ</span><span data-en="Desserts">Postres</span></h2>
+      <ul>
+        <li data-en="Ice Cream (vanilla, strawberry or chocolate)">Helado (vainilla, fresa o chocolate)</li>
+        <li data-en="Fried Banana">Plátano frito</li>
+        <li data-en="Crème Caramel">Flan</li>
+        <li data-en="Fried Ice Cream">Helado frito</li>
+      </ul>
+    </section>
+
+  <div class="foot">
+    <div class="btns">
+      <a class="btn btn-gold" id="pdfBtn" href="menu-buffet-es.pdf" download data-en="Download PDF">Descargar PDF</a>
+      <a class="btn btn-line" href="index.html" data-en="Back to website">Volver a la web</a>
+    </div>
+    <p data-en="Fish used for sushi preparation has been frozen previously. Menu subject to change.">Los pescados utilizados para la elaboración del sushi han sido congelados previamente. Carta sujeta a actualización; consulta disponibilidad en el local.</p>
+  </div>
+</main>
+
+<script>
+(function(){
+  const els=document.querySelectorAll('[data-en],[data-en-html]');
+  els.forEach(el=>{el._es=el.innerHTML;});
+  const btn=document.getElementById('langBtn');
+  const pdf=document.getElementById('pdfBtn');
+  function setLang(l){
+    els.forEach(el=>{
+      if(l==='en'){
+        if(el.dataset.enHtml!==undefined)el.innerHTML=el.dataset.enHtml;
+        else el.textContent=el.dataset.en;
+      }else el.innerHTML=el._es;
+    });
+    document.documentElement.lang=l;
+    btn.classList.toggle('en',l==='en');
+    btn.setAttribute('aria-checked',l==='en');
+    btn.setAttribute('aria-label',l==='es'?'Cambiar idioma a inglés':'Switch language to Spanish');
+    pdf.href=l==='en'?'menu-buffet-en.pdf':'menu-buffet-es.pdf';
+    document.title=l==='en'?'All you can eat menu · HOME SUSHI Benidorm':'Carta del buffet libre · HOME SUSHI Benidorm';
+    try{localStorage.setItem('hs-lang',l);}catch(e){}
+  }
+  btn.addEventListener('click',()=>{
+    // el texto cambia de alto al traducir: mantener a la vista la misma categoría
+    const s=cur&&document.getElementById(cur),y=s&&s.getBoundingClientRect().top;
+    setLang(document.documentElement.lang==='es'?'en':'es');
+    if(s)scrollBy({top:s.getBoundingClientRect().top-y,behavior:'instant'});
+  });
+  let saved=null;try{saved=localStorage.getItem('hs-lang');}catch(e){}
+  const q=new URLSearchParams(location.search).get('lang');
+  const start=q||saved;
+  if(start==='en')setLang('en');
+
+  // resalta la categoría visible en la barra
+  const chips=[...document.querySelectorAll('#chips a')];
+  const byId=Object.fromEntries(chips.map(a=>[a.getAttribute('href').slice(1),a]));
+  function mark(id){
+    chips.forEach(a=>a.classList.toggle('on',a===byId[id]));
+    const a=byId[id];if(!a)return;
+    const bar=a.parentElement;
+    bar.scrollTo({left:a.offsetLeft-bar.clientWidth/2+a.clientWidth/2,behavior:'smooth'});
+  }
+  const top=parseInt(getComputedStyle(document.documentElement).getPropertyValue('--top'));
+  const secs=[...document.querySelectorAll('.cat')];
+  let cur=null;
+  function onScroll(){
+    let id=null;
+    for(const s of secs){if(s.getBoundingClientRect().top<=top+40)id=s.id;}
+    if(innerHeight+scrollY>=document.body.scrollHeight-4)id=secs[secs.length-1].id;
+    if(id!==cur){cur=id;mark(id);}
+  }
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>

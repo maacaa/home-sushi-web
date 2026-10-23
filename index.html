@@ -313,7 +313,7 @@ html.js .reveal.in{opacity:1;transform:none}
       <div class="buffet-cta">
         <p class="eyebrow">Home Sushi · Benidorm</p>
         <h2 data-i18n="buffetH">Carta del <em>buffet libre</em></h2>
-        <a class="btn btn-gold" id="buffetBtn" href="menu-buffet-es.pdf" target="_blank" rel="noopener" data-i18n="buffetBtn">Ver carta del buffet</a>
+        <a class="btn btn-gold" id="buffetBtn" href="carta.html" data-i18n="buffetBtn">Ver carta del buffet</a>
       </div>
     </div>
   </div>
@@ -475,7 +475,7 @@ function apply(){
     else if(el._es!==undefined)el.innerHTML=el._es;
   });
   const bb=document.getElementById('buffetBtn');
-  if(bb)bb.href=lang==='en'?'menu-buffet-en.pdf':'menu-buffet-es.pdf';
+  if(bb)bb.href=lang==='en'?'carta.html?lang=en':'carta.html?lang=es';
   stateText();
 }
 function setLang(l){lang=l;
