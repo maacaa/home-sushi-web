@@ -91,6 +91,8 @@ const ultimoDia=()=>{const d=hoy();d.setDate(d.getDate()+CONFIG.diasVista);retur
 const fmtLargo=(d,loc=T().loc)=>{const s=new Intl.DateTimeFormat(loc,{weekday:'long',day:'numeric',month:'long'}).format(d);return s[0].toUpperCase()+s.slice(1);};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const maxPers=()=>CONFIG.aforo?Math.max(1,Math.floor(CONFIG.aforo*CONFIG.porcentajeMax)):CONFIG.maxSinAforo;
+// El chatbot (chatbot.js) lee de aquí las horas y límites, para no repetirlos
+window.hsReservas={config:CONFIG,maxPers};
 
 // Horas reservables de un día, agrupadas por turno
 function horas(k){

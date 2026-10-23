@@ -1,0 +1,60 @@
+/* Asistente de reservas · usa los tokens de color y tipografía de index.html */
+.hc{position:fixed;right:24px;bottom:24px;z-index:85;font-family:var(--sans)}
+
+/* botón flotante */
+.hc-fab{width:58px;height:58px;border-radius:50%;border:0;background:var(--gold);color:var(--paper2);display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 30px rgba(26,22,15,.3);transition:.25s;margin-left:auto}
+.hc-fab:hover{background:#8c6e23}
+.hc-fab svg{width:26px;height:26px;grid-area:1/1}
+.hc-ic-x,.hc.open .hc-ic-chat{display:none}
+.hc.open .hc-ic-x{display:block}
+.hc button:focus-visible,.hc input:focus-visible,.hc a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* panel */
+.hc-panel{padding:0;position:absolute;right:0;bottom:74px;width:min(380px,calc(100vw - 32px));height:min(580px,calc(100dvh - 186px));min-height:300px;display:flex;flex-direction:column;background:var(--paper2);color:var(--ink);line-height:1.55;box-shadow:0 30px 80px rgba(26,22,15,.35);border:1px solid var(--gold-soft);animation:hcIn .3s cubic-bezier(.2,.7,.3,1)}
+.hc-panel[hidden]{display:none}
+@keyframes hcIn{from{opacity:0;transform:translateY(12px)}}
+.hc-hd{flex:none;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px 12px 18px;border-bottom:1px solid var(--hair)}
+.hc-hd .eyebrow{font-size:9.5px}
+.hc-hd h2{font-family:var(--disp);font-weight:500;font-size:21px;line-height:1.1;margin-top:3px}
+.hc-x{flex:none;width:36px;height:36px;border:1px solid var(--hair);background:none;color:var(--ink2);display:grid;place-items:center;cursor:pointer;transition:.25s}
+.hc-x:hover{border-color:var(--gold);color:var(--gold)}
+.hc-x svg{width:14px;height:14px}
+
+/* conversación */
+.hc-log{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:14px 14px 10px;display:flex;flex-direction:column;gap:8px;scrollbar-width:thin;scrollbar-color:var(--gold-soft) transparent}
+.hc-msg{max-width:86%;padding:8px 12px;font-size:14px;line-height:1.5;animation:hcIn .25s ease-out}
+.hc-bot{align-self:flex-start;background:var(--paper);border:1px solid var(--hair);color:var(--ink2)}
+.hc-user{align-self:flex-end;background:var(--ink);color:var(--paper2)}
+.hc-msg a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.hc-msg a:hover{color:var(--gold)}
+.hc-msg b{font-weight:600;color:var(--ink)}
+.hc-cta{display:block;margin-top:8px;padding:9px 14px;font-size:10.5px;letter-spacing:.16em}
+
+/* temas y campo de texto */
+/* todos los temas a la vista, repartidos en las filas que hagan falta */
+.hc-chips{flex:none;display:flex;flex-wrap:wrap;gap:6px;padding:10px 14px;border-top:1px solid var(--hair)}
+.hc-chip{white-space:nowrap;background:none;border:1px solid var(--gold-soft);color:var(--ink2);font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;padding:7px 10px;cursor:pointer;transition:.2s}
+.hc-chip:hover{border-color:var(--gold);color:var(--gold)}
+.hc-f{flex:none;display:flex;border-top:1px solid var(--hair)}
+.hc-f input{flex:1;min-width:0;border:0;background:none;padding:12px 16px;font:inherit;font-size:16px;color:var(--ink)}
+.hc .hc-f input:focus-visible{outline:none}
+.hc-f:focus-within{box-shadow:inset 0 2px 0 var(--gold)}
+.hc-f input::placeholder{color:var(--muted)}
+.hc-send{flex:none;width:50px;border:0;background:none;color:var(--gold);cursor:pointer;display:grid;place-items:center}
+.hc-send svg{width:20px;height:20px}
+.hc-send:hover{color:#8c6e23}
+
+/* móvil: el asistente ocupa toda la pantalla y se cierra con la X de la cabecera */
+@media(max-width:560px){
+  .hc{right:16px;bottom:16px}
+  .hc-fab{width:52px;height:52px}
+  .hc.open .hc-fab{display:none}
+  html.hc-lock{overflow:hidden}
+  .hc-panel{position:fixed;inset:0;width:auto;height:100dvh;border:0;box-shadow:none;padding-bottom:env(safe-area-inset-bottom)}
+  .hc-hd{padding:10px 12px 10px 18px}
+  .hc-x{width:42px;height:42px}
+  .hc-msg{font-size:15px}
+  .hc-chip{font-size:11px;padding:9px 12px}
+  .hc-f input{padding:14px 16px}
+  .hc-send{width:56px}
+}
