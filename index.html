@@ -147,6 +147,9 @@ section{padding:120px 0}
 .dgrupo{margin-top:26px;padding-top:20px;border-top:1px solid var(--hair)}
 .dgrupo h4{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--ink2);margin-bottom:12px}
 .dgrupo p{font-family:var(--disp);font-size:19px;line-height:1.75;color:var(--ink2)}
+.dlist{list-style:none}
+.dlist li{position:relative;padding:4px 0 4px 22px;font-family:var(--disp);font-size:19px;line-height:1.45;color:var(--ink2)}
+.dlist li::before{content:"";position:absolute;left:2px;top:calc(4px + .73em);width:10px;height:1px;background:var(--gold)}
 .cardnote{margin-top:64px;font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.03em;max-width:760px}
 
 /* LOCAL */
@@ -332,9 +335,9 @@ html.js .reveal.in{opacity:1;transform:none}
       <article class="card reveal">
         <span class="tag" data-i18n="cardA">Menú del día · A</span>
         <div class="price"><sup>€</sup>10,95</div>
-        <div class="dgrupo"><h4 data-i18n="g1">Primero · a elegir</h4><p data-i18n="g1p">Sopa agripicante · Sopa de pollo con maíz · Ensalada de la casa · Ensalada china · Rollito de primavera · Rollo de la casa</p></div>
-        <div class="dgrupo"><h4 data-i18n="g2">Segundo · a elegir</h4><p data-i18n="g2p">Arroz tres delicias · Arroz con huevo · Arroz blanco · Arroz especial · Tallarines con verduras · Pan japonés</p></div>
-        <div class="dgrupo"><h4 data-i18n="g3">Tercero · a elegir</h4><p data-i18n="g3p">Pollo con salsa picante · Pollo con almendras · Pollo agridulce · Pollo con limón · Buey con champiñones · Buey con cebolla · Buey con salsa de ostras · Verduras mixtas</p></div>
+        <div class="dgrupo"><h4 data-i18n="g1">Primero · a elegir</h4><ul class="dlist" data-i18n="g1p"><li>Sopa agripicante</li><li>Sopa de pollo con maíz</li><li>Ensalada de la casa</li><li>Ensalada china</li><li>Rollito de primavera</li><li>Rollo de la casa</li></ul></div>
+        <div class="dgrupo"><h4 data-i18n="g2">Segundo · a elegir</h4><ul class="dlist" data-i18n="g2p"><li>Arroz tres delicias</li><li>Arroz con huevo</li><li>Arroz blanco</li><li>Arroz especial</li><li>Tallarines con verduras</li><li>Pan japonés</li></ul></div>
+        <div class="dgrupo"><h4 data-i18n="g3">Tercero · a elegir</h4><ul class="dlist" data-i18n="g3p"><li>Pollo con salsa picante</li><li>Pollo con almendras</li><li>Pollo agridulce</li><li>Pollo con limón</li><li>Buey con champiñones</li><li>Buey con cebolla</li><li>Buey con salsa de ostras</li><li>Verduras mixtas</li></ul></div>
         <div class="dgrupo"><h4 data-i18n="g4">Bebida</h4><p data-i18n="g4p">Agua, refresco, caña o copa de vino</p></div>
         <div class="dgrupo"><h4 data-i18n="g5">Postre</h4><p data-i18n="g5p">Bola de helado, flan, café o té</p></div>
       </article>
@@ -342,9 +345,9 @@ html.js .reveal.in{opacity:1;transform:none}
       <article class="card reveal">
         <span class="tag" data-i18n="cardB">Menú del día · B</span>
         <div class="price"><sup>€</sup>12,50</div>
-        <div class="dgrupo"><h4 data-i18n="h1g">Primero · a elegir</h4><p data-i18n="h1gp">Sopa de maíz con cangrejo · Sopa miso · Ensalada tailandesa · Ensalada de algas · Rollito de pato · Rollo japonés</p></div>
-        <div class="dgrupo"><h4 data-i18n="g2">Segundo · a elegir</h4><p data-i18n="h2gp">Arroz Yang Zhou · Arroz blanco · Tallarines fritos · Tallarines japoneses · Fideos de arroz fritos</p></div>
-        <div class="dgrupo"><h4 data-i18n="g3">Tercero · a elegir</h4><p data-i18n="h3gp">Pollo Gong Bao · Pollo con salsa de curry · Pollo con bambú y setas chinas · Buey con salsa de curry · Buey con salsa picante · Buey japonés · Gambas con salsa picante · Gambas con verduras · Pato Pekín · Verduras mixtas</p></div>
+        <div class="dgrupo"><h4 data-i18n="h1g">Primero · a elegir</h4><ul class="dlist" data-i18n="h1gp"><li>Sopa de maíz con cangrejo</li><li>Sopa miso</li><li>Ensalada tailandesa</li><li>Ensalada de algas</li><li>Rollito de pato</li><li>Rollo japonés</li></ul></div>
+        <div class="dgrupo"><h4 data-i18n="g2">Segundo · a elegir</h4><ul class="dlist" data-i18n="h2gp"><li>Arroz Yang Zhou</li><li>Arroz blanco</li><li>Tallarines fritos</li><li>Tallarines japoneses</li><li>Fideos de arroz fritos</li></ul></div>
+        <div class="dgrupo"><h4 data-i18n="g3">Tercero · a elegir</h4><ul class="dlist" data-i18n="h3gp"><li>Pollo Gong Bao</li><li>Pollo con salsa de curry</li><li>Pollo con bambú y setas chinas</li><li>Buey con salsa de curry</li><li>Buey con salsa picante</li><li>Buey japonés</li><li>Gambas con salsa picante</li><li>Gambas con verduras</li><li>Pato Pekín</li><li>Verduras mixtas</li></ul></div>
         <div class="dgrupo"><h4 data-i18n="g4">Bebida</h4><p data-i18n="g4p">Agua, refresco, caña o copa de vino</p></div>
         <div class="dgrupo"><h4 data-i18n="g5">Postre</h4><p data-i18n="g5p">Bola de helado, flan, café o té</p></div>
       </article>
@@ -362,9 +365,9 @@ html.js .reveal.in{opacity:1;transform:none}
       <p class="lead" data-i18n="lead3">Tres salones con techo de madera a la vista, lámparas cálidas y la terraza abierta a la playa de Levante.</p>
     </div>
     <div class="gal">
-      <figure class="reveal"><img src="assets/fachada.jpg" alt="Fachada de Home Sushi en C. Ibiza 9, Benidorm"><figcaption data-i18n="g1" style="text-shadow:0 1px 8px rgba(26,22,15,.9)">El restaurante · C. Ibiza 9</figcaption></figure>
-      <figure class="reveal"><img src="assets/terraza.jpg" alt="Salón ventana a la palmera"><figcaption data-i18n="g2">Ventana al jardín</figcaption></figure>
-      <figure class="reveal"><img src="assets/sala-oriental.jpg" alt="Sala con decoración oriental y manteles rojos"><figcaption data-i18n="g3">La sala oriental</figcaption></figure>
+      <figure class="reveal"><img src="assets/fachada.jpg" alt="Fachada de Home Sushi en C. Ibiza 9, Benidorm"><figcaption data-i18n="gal1" style="text-shadow:0 1px 8px rgba(26,22,15,.9)">El restaurante · C. Ibiza 9</figcaption></figure>
+      <figure class="reveal"><img src="assets/terraza.jpg" alt="Salón ventana a la palmera"><figcaption data-i18n="gal2">Ventana al jardín</figcaption></figure>
+      <figure class="reveal"><img src="assets/sala-oriental.jpg" alt="Sala con decoración oriental y manteles rojos"><figcaption data-i18n="gal3">La sala oriental</figcaption></figure>
     </div>
   </div>
 </section>
@@ -439,16 +442,16 @@ h1a:"Lunchtime",h1b:"Evening",h1c:"Days",h1d:"Every day",h1e:"Phone",
 c1:"The dining room · C. Ibiza 9, Benidorm",
 k3:"Lunch set · monday to friday",h2b:"Three courses chosen from, <em>for under thirteen euros</em>.",lead2:"Lunchtime only, 12:00 to 16:00, Monday to Friday — except bank holidays. Drink and dessert included in both menus.",
 cardA:"Lunch set · A",cardB:"Lunch set · B",
-g1:"First course · choose one",g1p:"Hot-and-sour soup · Chicken and sweetcorn soup · House salad · Chinese salad · Spring roll · House roll",
-g2:"Second course · choose one",g2p:"Three-treasures fried rice · Egg rice · Plain rice · Special rice · Vegetables noodles · Japanese bun",
-g3:"Third course · choose one",g3p:"Spicy chicken · Chicken with almonds · Sweet-and-sour chicken · Lemon chicken · Beef with mushrooms · Beef with onions · Beef with oyster sauce · Mixed vegetables",
+g1:"First course · choose one",h1g:"First course · choose one",g1p:"<li>Hot-and-sour soup</li><li>Chicken and sweetcorn soup</li><li>House salad</li><li>Chinese salad</li><li>Spring roll</li><li>House roll</li>",
+g2:"Second course · choose one",g2p:"<li>Three-treasures fried rice</li><li>Egg rice</li><li>Plain rice</li><li>Special rice</li><li>Vegetables noodles</li><li>Japanese bun</li>",
+g3:"Third course · choose one",g3p:"<li>Spicy chicken</li><li>Chicken with almonds</li><li>Sweet-and-sour chicken</li><li>Lemon chicken</li><li>Beef with mushrooms</li><li>Beef with onions</li><li>Beef with oyster sauce</li><li>Mixed vegetables</li>",
 g4:"Drink",g4p:"Water, soft drink, small beer or glass of wine",g5:"Dessert",g5p:"Scoop of ice cream, crème caramel, coffee or tea",
-h1gp:"Corn soup with crab · Miso soup · Thai salad · Seaweed salad · Duck roll · Japanese roll",
-h2gp:"Yang Zhou fried rice · Plain rice · Fried noodles · Japanese noodles · Fried rice noodles",
-h3gp:"Gong Bao chicken · Chicken in curry sauce · Chicken with bamboo and Chinese mushrooms · Beef in curry sauce · Spicy beef · Japanese beef · Spicy prawns · Prawns with vegetables · Peking duck · Mixed vegetables",
+h1gp:"<li>Corn soup with crab</li><li>Miso soup</li><li>Thai salad</li><li>Seaweed salad</li><li>Duck roll</li><li>Japanese roll</li>",
+h2gp:"<li>Yang Zhou fried rice</li><li>Plain rice</li><li>Fried noodles</li><li>Japanese noodles</li><li>Fried rice noodles</li>",
+h3gp:"<li>Gong Bao chicken</li><li>Chicken in curry sauce</li><li>Chicken with bamboo and Chinese mushrooms</li><li>Beef in curry sauce</li><li>Spicy beef</li><li>Japanese beef</li><li>Spicy prawns</li><li>Prawns with vegetables</li><li>Peking duck</li><li>Mixed vegetables</li>",
 cardnote:"※ Dishes taken from the lunch-set menus published by the restaurant itself. Confirm daily availability when booking. Excluding bank holidays.",
 k6:"The venue",h2d:"Wood, golden lamps <em>and palm trees</em> over the sea.",lead3:"Three dining rooms with exposed timber ceilings, warm lighting and a room opening onto Levante beach.",
-g1:"The restaurant · C. Ibiza 9",g2:"Garden-facing room",g3:"The oriental room",
+gal1:"The restaurant · C. Ibiza 9",gal2:"Garden-facing room",gal3:"The oriental room",
 k7:"Contact & bookings",h2f:"We're waiting for you at C. Ibiza&nbsp;9.",
 c1:"Address",c1l:"How to arrive →",c2:"Opening hours",c2v:"Every day · 12:00–16:00 and 18:00–00:00",c3:"Lunch set",c3v:"Monday to Friday, lunchtime (12:00–16:00). Except bank holidays.",c4:"Phone",
 follow:"Follow us for promos",
