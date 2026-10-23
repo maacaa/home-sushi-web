@@ -1,5 +1,8 @@
 /* Asistente de reservas · usa los tokens de color y tipografía de index.html */
-.hc{position:fixed;right:24px;bottom:24px;z-index:85;font-family:var(--sans)}
+/* --hc-badge: hueco abajo para la insignia «Powered by Netlify» (abajo a la derecha, ~50px de alto, siempre por encima
+   de todo y que el plan gratuito no deja ocultar). Si algún día desaparece, basta con ponerlo a 0px. */
+:root{--hc-badge:56px}
+.hc{position:fixed;right:24px;bottom:calc(16px + var(--hc-badge));z-index:85;font-family:var(--sans)}
 
 /* botón flotante */
 .hc-fab{width:58px;height:58px;border-radius:50%;border:0;background:var(--gold);color:var(--paper2);display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 30px rgba(26,22,15,.3);transition:.25s;margin-left:auto}
@@ -10,7 +13,7 @@
 .hc button:focus-visible,.hc input:focus-visible,.hc a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
 /* panel */
-.hc-panel{padding:0;position:absolute;right:0;bottom:74px;width:min(380px,calc(100vw - 32px));height:min(580px,calc(100dvh - 186px));min-height:300px;display:flex;flex-direction:column;background:var(--paper2);color:var(--ink);line-height:1.55;box-shadow:0 30px 80px rgba(26,22,15,.35);border:1px solid var(--gold-soft);animation:hcIn .3s cubic-bezier(.2,.7,.3,1)}
+.hc-panel{padding:0;position:absolute;right:0;bottom:74px;width:min(380px,calc(100vw - 32px));height:min(580px,calc(100dvh - 178px - var(--hc-badge)));min-height:300px;display:flex;flex-direction:column;background:var(--paper2);color:var(--ink);line-height:1.55;box-shadow:0 30px 80px rgba(26,22,15,.35);border:1px solid var(--gold-soft);animation:hcIn .3s cubic-bezier(.2,.7,.3,1)}
 .hc-panel[hidden]{display:none}
 @keyframes hcIn{from{opacity:0;transform:translateY(12px)}}
 .hc-hd{flex:none;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px 12px 18px;border-bottom:1px solid var(--hair)}
@@ -46,11 +49,12 @@
 
 /* móvil: el asistente ocupa toda la pantalla y se cierra con la X de la cabecera */
 @media(max-width:560px){
-  .hc{right:16px;bottom:16px}
+  .hc{right:16px;bottom:calc(12px + var(--hc-badge))}
   .hc-fab{width:52px;height:52px}
   .hc.open .hc-fab{display:none}
   html.hc-lock{overflow:hidden}
-  .hc-panel{position:fixed;inset:0;width:auto;height:100dvh;border:0;box-shadow:none;padding-bottom:env(safe-area-inset-bottom)}
+  .hc-panel{position:fixed;inset:0;width:auto;height:100dvh;border:0;box-shadow:none;padding-bottom:calc(var(--hc-badge) + env(safe-area-inset-bottom))}
+  .hc-f{border-bottom:1px solid var(--hair)}
   .hc-hd{padding:10px 12px 10px 18px}
   .hc-x{width:42px;height:42px}
   .hc-msg{font-size:15px}
