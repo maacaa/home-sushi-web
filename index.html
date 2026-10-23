@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOME SUSHI Benidorm · Buffet libre japonés a la carta</title>
+<meta name="description" content="Restaurante japonés y chino en Benidorm, a escasos 200 metros de la playa. Buffet libre a la carta con teppanyaki y menús del día de lunes a viernes. C. Ibiza 9 · 622 25 88 58.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/leaflet/leaflet.css">
+<link rel="stylesheet" href="assets/reservas.css">
+<script>document.documentElement.className+=' js';</script>
+<style>
+:root{
+  --paper:#f3eee3;
+  --paper2:#faf7ef;
+  --ink:#1a160f;
+  --ink2:#453c2e;
+  --muted:#8a7d67;
+  --gold:#a8842e;
+  --gold-soft:rgba(168,132,46,.45);
+  --hair:rgba(26,22,15,.14);
+  --hairW:rgba(250,247,239,.18);
+  --disp:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  --mono:ui-monospace,'Cascadia Mono','Segoe UI Mono',Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{counter-reset:cl;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.8;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:1140px;margin:0 auto;padding:0 32px}
+.eyebrow{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.34em;text-transform:uppercase;color:var(--gold)}
+.num{font-family:var(--mono);font-size:11px;letter-spacing:.28em;color:var(--gold)}
+.serif{font-family:var(--disp)}
+
+/* NAV */
+nav{position:fixed;inset:0 0 auto 0;z-index:80;border-bottom:1px solid transparent;transition:.35s;background:transparent}
+nav.scrolled{background:rgba(243,238,227,.94);backdrop-filter:blur(10px);border-bottom-color:var(--hair)}
+.navi{display:flex;align-items:center;justify-content:space-between;height:76px}
+.brand{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--ink);display:flex;align-items:center;gap:12px;white-space:nowrap}
+.nav-links a{position:relative;padding:6px 0;white-space:nowrap}
+.brand .mark{background:var(--ink);padding:4px 6px;height:26px}
+.nav-links{display:flex;gap:24px;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink2)}
+.nav-links a{position:relative;padding:6px 0}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold);transition:.3s}
+.nav-links a:hover::after{width:100%}
+.actic{display:flex;align-items:center;gap:22px}
+.lang-sw{position:relative;width:86px;height:34px;background:none;border:1px solid rgba(168,132,46,.6);border-radius:99px;padding:0;cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.12em}
+.lang-sw .knob{position:absolute;top:3px;left:3px;width:38px;height:26px;border-radius:99px;background:var(--gold);transition:transform .28s cubic-bezier(.4,0,.2,1)}
+.lang-sw.en .knob{transform:translateX(41px)}
+.lang-sw .lab{position:absolute;top:0;height:100%;width:41px;display:grid;place-items:center;line-height:1}
+.lang-sw .l-es{left:2px;color:var(--paper2)}
+.lang-sw .l-en{left:41px;color:var(--muted)}
+nav.scrolled .lang-sw .l-es{color:var(--ink)}
+nav.scrolled .lang-sw .l-en{color:var(--muted)}
+.lang-sw.en .l-es{color:var(--muted)}
+nav.scrolled .lang-sw.en .l-es{color:var(--muted)}
+.lang-sw.en .l-en{color:#fff!important}
+.btn{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;padding:13px 26px;border:1px solid;border-radius:0;display:inline-block;transition:.25s;cursor:pointer;background:none}
+.btn-gold{background:var(--gold);border-color:var(--gold);color:var(--paper2)}
+.btn-gold:hover{background:#8c6e23;border-color:#8c6e23;color:#fff}
+.btn-line{border-color:var(--ink);color:var(--ink)}
+.btn-line:hover{border-color:var(--gold);color:var(--gold)}
+.burger{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.burger span{display:block;width:22px;height:1px;background:var(--ink);margin:6px 0}
+@media(max-width:1500px){
+  .navi{gap:16px}
+  .brand{font-size:11px;letter-spacing:.18em;gap:8px}
+  .nav-links{gap:15px}
+  .actic{gap:14px}
+  .nav-soc svg{width:13px;height:13px}
+}
+
+/* HERO */
+.hero{position:relative;padding:90px 0 90px;background:var(--paper)}
+.hero-grid{display:block}
+.hero .over{margin-bottom:26px}
+.hero h1{font-family:var(--disp);font-weight:500;font-size:clamp(52px,7.4vw,102px);line-height:.98;letter-spacing:-.01em}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero .lede{margin-top:30px;color:var(--ink2);font-size:16.5px}
+.hero-cta{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap}
+.hero-cols{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:56px}
+.buffet-cta .eyebrow{margin-bottom:16px}
+.buffet-cta h2{font-family:var(--disp);font-weight:500;font-size:clamp(34px,4vw,54px);line-height:1.05}
+.buffet-cta h2 em{font-style:italic;color:var(--gold)}
+.buffet-cta .btn{margin-top:28px}
+.hrsbox{max-width:480px;border-top:1px solid var(--hair);padding-top:22px;font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--muted)}
+.hrsbox .st{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin-bottom:14px}
+.hrsbox .dot{width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.hrsbox div.r{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--hair)}
+.hrsbox div.r:last-child{border-bottom:none}
+.hrsbox b{font-weight:600;color:var(--ink2)}
+
+/* FOTO BANDA */
+.band{position:relative;margin-top:76px;height:min(72vh,640px);overflow:hidden;background:var(--ink)}
+.band img{width:100%;height:100%;object-fit:cover}
+.band figcaption{position:absolute;left:32px;bottom:24px;font-family:var(--mono);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:rgba(250,247,239,.85);text-shadow:0 1px 8px rgba(26,22,15,.9)}
+
+/* SECTIONS */
+section{padding:120px 0}
+.sec-head{max-width:760px}
+.sec-head .row1{display:flex;align-items:baseline;gap:18px;margin-bottom:22px}
+.sec-head h2{font-family:var(--disp);font-weight:500;font-size:clamp(36px,4.6vw,60px);line-height:1.05}
+.sec-head h2 em{font-style:italic;color:var(--gold)}
+.sec-head .lead{margin-top:20px;color:var(--ink2);max-width:560px;font-size:16.5px}
+
+/* TRIO (usp) */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--hair);margin-top:72px}
+.trio .c{padding:36px 36px 42px 0;border-bottom:1px solid var(--hair)}
+.trio .c + .c{padding-left:36px;border-left:1px solid var(--hair)}
+.trio .n{font-family:var(--mono);font-size:11px;letter-spacing:.26em;color:var(--gold)}
+.trio h3{font-family:var(--disp);font-weight:500;font-size:27px;margin:18px 0 10px}
+.trio p{color:var(--muted);font-size:15px}
+
+/* BUFFET / CARTA */
+.oscuro{background:#2c2416;color:var(--paper)}
+.oscuro .eyebrow{color:var(--gold)}
+.oscuro .lead{color:rgba(250,247,239,.66)}
+.cat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--hairW);border:1px solid var(--hairW);margin-top:64px}
+.cat{background:var(--ink);padding:34px 26px 40px;transition:.3s}
+.cat:hover{background:#221d13}
+.cat .cn{font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:var(--gold);display:block;margin-bottom:16px}
+.cat h3{font-family:var(--disp);font-weight:500;font-style:italic;font-size:25px;color:var(--paper)}
+.plates{display:flex;gap:56px;align-items:center;margin-top:70px;flex-wrap:wrap;justify-content:center}
+.plates figure{text-align:center;position:relative}
+.plates figure::before{content:"";position:absolute;inset:-14px;border:1px solid var(--hairW);transform:rotate(-3deg)}
+.plates figure:nth-child(2)::before{transform:rotate(2deg)}
+.plates figure:nth-child(3)::before{transform:rotate(-1.5deg)}
+.plates img{width:210px;height:210px;object-fit:cover;position:relative;z-index:1}
+.plates figcaption{margin-top:20px;font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.sign{margin-top:80px;text-align:center}
+.sign .q{font-family:var(--disp);font-style:italic;font-weight:500;font-size:clamp(26px,3.4vw,42px);color:var(--ink)}
+.sign .src{display:block;margin-top:16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+
+/* MENÚS DEL DÍA */
+.menu-cards{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:72px}
+.card{background:var(--paper2);border:1px solid var(--hair);padding:52px 54px 44px;position:relative}
+.card::after{content:"";position:absolute;inset:10px;border:1px solid var(--gold-soft);pointer-events:none}
+.card .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.card .price{font-family:var(--disp);font-weight:600;font-size:74px;line-height:1;margin:20px 0 8px;color:var(--ink)}
+.card .price sup{font-size:26px;color:var(--gold)}
+.card .sub{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--muted)}
+.dgrupo{margin-top:26px;padding-top:20px;border-top:1px solid var(--hair)}
+.dgrupo h4{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--ink2);margin-bottom:12px}
+.dgrupo p{font-family:var(--disp);font-size:19px;line-height:1.75;color:var(--ink2)}
+.cardnote{margin-top:64px;font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.03em;max-width:760px}
+
+/* LOCAL */
+.gal{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:18px;margin-top:64px}
+.gal figure{position:relative;overflow:hidden}
+.gal img{width:100%;height:100%;object-fit:cover;aspect-ratio:1;transition:.7s}
+.gal figure:hover img{transform:scale(1.04)}
+.gal figcaption{position:absolute;left:16px;bottom:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.92);text-shadow:0 1px 8px rgba(26,22,15,.9)}
+
+/* CONTACTO */
+.ct{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;margin-top:64px;align-items:start}
+.ct-rows .row{display:grid;grid-template-columns:120px 1fr;gap:6px;padding:20px 0;border-bottom:1px solid var(--hair);font-size:15px}
+.ct-rows .row b{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);padding-top:7px}
+.ct-rows a:hover{color:var(--gold)}
+.wc{display:flex;gap:12px;align-items:center;margin-top:26px}
+.wc span{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase}
+.wc a{width:46px;height:46px;border:1px solid var(--hair);display:grid;place-items:center;transition:.25s}
+.wc a:hover{border-color:var(--gold);color:var(--gold);background:var(--paper2)}
+.wc svg{width:18px;height:18px}
+.nav-soc{display:flex;gap:8px}
+.nav-soc a{width:34px;height:34px;border:1px solid var(--hair);display:grid;place-items:center;color:var(--ink2);transition:.25s}
+.nav-soc a:hover{border-color:var(--gold);color:var(--gold)}
+.nav-soc svg{width:14px;height:14px}
+.nav-links .msoc{display:none}
+.fsoc{display:flex;gap:8px}
+.fsoc a{width:30px;height:30px;border:1px solid var(--hair);display:grid;place-items:center;color:var(--muted);transition:.25s}
+.fsoc a:hover{border-color:var(--gold);color:var(--gold)}
+.fsoc svg{width:13px;height:13px}
+.map{border:1px solid var(--hair);position:relative;overflow:hidden;min-height:460px}
+.map #map{position:absolute;inset:0;z-index:0;background:#e9e2d2}
+.map-chip{position:absolute;z-index:1000;top:14px;left:14px;background:rgba(250,247,239,.95);border:1px solid var(--hair);padding:10px 16px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink2);box-shadow:0 2px 12px rgba(26,22,15,.08)}
+.map-chip b{color:var(--gold);font-weight:600}
+.hs-pin svg{display:block}
+.leaflet-tile-pane{filter:sepia(.32) saturate(.72) brightness(1.03)}
+.leaflet-container{font-family:var(--mono)!important;font-size:10px!important}
+.leaflet-control-attribution{background:rgba(250,247,239,.85)!important;font-size:9px!important;letter-spacing:.03em;color:var(--muted)!important;padding:0 6px}
+.leaflet-control-attribution a{color:var(--muted)!important;text-decoration:none}
+.leaflet-bar{border:1px solid var(--hair)!important;box-shadow:none!important}
+.leaflet-bar a{background:var(--paper2)!important;color:var(--ink2)!important;border-bottom:1px solid var(--hair)!important}
+.leaflet-bar a:hover{background:#fff!important;color:var(--gold)!important}
+
+/* CIERRE */
+.closing{background:var(--ink);color:var(--paper);text-align:center;padding:110px 24px}
+.closing .q{font-family:var(--disp);font-style:italic;font-weight:500;font-size:clamp(32px,4.8vw,58px);line-height:1.15;max-width:17em;margin:0 auto}
+.closing .btn{margin-top:44px}
+
+footer{padding:30px 0;color:var(--muted);font-size:12.5px;border-top:1px solid var(--hair)}
+footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em}
+
+.carta-num{counter-reset:cl}
+.luxframe{border:1px solid var(--hair);padding:10px;background:var(--surface)}
+.luxframe img{width:100%;display:block}
+.luxframe figcaption{margin-top:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.cline{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:13px 4px;border-bottom:1px solid var(--hair);font-family:var(--disp);font-size:20px;color:var(--ink2);counter-increment:cl}
+.cline::before{content:counter(cl,decimal-leading-zero);font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--gold)}
+/* reveal */
+html.js .reveal{opacity:0;transform:translateY(16px);transition:.7s cubic-bezier(.2,.7,.3,1)}
+html.js .reveal.in{opacity:1;transform:none}
+
+@media(max-width:940px){
+  .nav-links{display:none}
+  .burger{display:block}
+  .nav-soc{display:none}
+  nav.open .nav-links{display:flex;position:absolute;top:76px;left:0;right:0;flex-direction:column;background:var(--ink);padding:30px 32px;gap:20px;border-bottom:1px solid var(--hair)}
+  nav.open .nav-links a{color:var(--paper)}
+  nav.open .nav-links .msoc{display:flex;gap:10px;margin-top:8px;border-top:1px solid var(--hairW);padding-top:18px}
+  .msoc a{width:40px;height:40px;border:1px solid var(--hairW);display:grid;place-items:center;color:var(--paper2);transition:.25s}
+  .msoc a:hover{border-color:var(--gold);color:var(--gold)}
+  .msoc a::after{display:none}
+  .msoc svg{width:16px;height:16px}
+  section{padding:84px 0}
+  .cat-grid{grid-template-columns:1fr 1fr}
+  .menu-cards,.ct,.gal,.trio,.hero-cols{grid-template-columns:1fr}
+  .trio .c + .c{padding-left:0;border-left:none}
+  .card{padding:36px 28px}
+  .plates img{width:180px;height:180px}
+}
+@media(max-width:560px){
+  .lang-sw{width:76px;height:30px}
+  .lang-sw .knob{width:32px;height:24px}
+  .lang-sw.en .knob{transform:translateX(37px)}
+  .lang-sw .lab{width:35px}
+  .lang-sw .l-en{left:35px}
+  .cat-grid{grid-template-columns:1fr}
+  .gal{grid-template-columns:1fr}
+  .band{height:52vh}
+  .brand{font-size:11px;letter-spacing:.2em}
+  .actic{gap:10px}
+  .btn{padding:11px 16px}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap navi">
+    <a class="brand" href="#top"><img class="mark" src="assets/logo.png" alt="Home Sushi">Home Sushi · Benidorm</a>
+    <div class="nav-links">
+      <a href="#menudia" data-i18n="n2">Menú del día</a>
+      <a href="#local" data-i18n="n4">El local</a>
+      <a href="#contacto" data-i18n="n5">Contacto</a>
+      <div class="msoc">
+        <a href="https://www.facebook.com/homesushibenidorm" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6c-.3-.04-1.3-.13-2.45-.13-2.4 0-4.05 1.47-4.05 4.17v2.33H7.5V13h2.7v8h3.3z"/></svg></a>
+        <a href="https://instagram.com/restaurantehomesushi_benidorm" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3.5" y="3.5" width="17" height="17"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r=".8" fill="currentColor" stroke="none"/></svg></a>
+      </div>
+    </div>
+    <div class="actic">
+      <div class="nav-soc">
+        <a href="https://www.facebook.com/homesushibenidorm" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6c-.3-.04-1.3-.13-2.45-.13-2.4 0-4.05 1.47-4.05 4.17v2.33H7.5V13h2.7v8h3.3z"/></svg></a>
+        <a href="https://instagram.com/restaurantehomesushi_benidorm" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3.5" y="3.5" width="17" height="17"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r=".8" fill="currentColor" stroke="none"/></svg></a>
+      </div>
+      <button class="lang-sw" id="langBtn" role="switch" aria-checked="false" aria-label="Cambiar idioma a inglés">
+        <span class="knob"></span><span class="lab l-es">ES</span><span class="lab l-en">EN</span>
+      </button>
+      <a class="btn btn-gold" href="tel:+34622258858" data-reserva data-i18n="book">Reservar</a>
+      <button class="burger" id="burger" aria-label="Menú"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<figure class="band reveal">
+  <img src="assets/salon.jpg" alt="Salón principal de Home Sushi Benidorm, techo de madera y lámparas cálidas">
+  <figcaption data-i18n="c1">El salón · C. Ibiza 9, Benidorm</figcaption>
+</figure>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow over" data-i18n="k1">Restaurante japonés · buffet libre a la carta · Benidorm</p>
+      <h1 data-i18n="h1">Buffet libre japonés <em>a la carta</em>, a 200 metros de la playa.</h1>
+      <p class="lede" data-i18n="sub">En C. Ibiza 9, junto a la playa de Levante: cocina japonesa y china tradicional con teppanyaki, pídela por rondas desde la mesa y recíbela recién hecha. Mediodía y noche, todos los días.</p>
+      <div class="hero-cta">
+        <a class="btn btn-gold" href="tel:+34622258858" data-reserva data-i18n="book2">Reservar mesa</a>
+        <a class="btn btn-line" href="#menudia" data-i18n="menu">Menú del día</a>
+      </div>
+    </div>
+    <div class="hero-cols">
+      <div class="hrsbox">
+        <div class="st"><span class="dot"></span><span id="openState" data-i18n="state">Hoy · abierto 12:00–16:00 y 18:00–00:00</span></div>
+        <div class="r"><span data-i18n="h1a">Mediodía</span><b>12:00 – 16:00</b></div>
+        <div class="r"><span data-i18n="h1b">Noche</span><b>18:00 – 00:00</b></div>
+        <div class="r"><span data-i18n="h1c">Días</span><b data-i18n="h1d">Todos los días</b></div>
+        <div class="r"><span data-i18n="h1e">Teléfono</span><b><a href="tel:+34622258858">622 25 88 58</a></b></div>
+      </div>
+      <div class="buffet-cta">
+        <p class="eyebrow">Home Sushi · Benidorm</p>
+        <h2 data-i18n="buffetH">Carta del <em>buffet libre</em></h2>
+        <a class="btn btn-gold" id="buffetBtn" href="menu-buffet-es.pdf" target="_blank" rel="noopener" data-i18n="buffetBtn">Ver carta del buffet</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="oscuro" id="menudia" data-od-id="menu-del-dia">
+  <div class="wrap">
+    <div class="sc-head reveal" style="display:contents"></div>
+    <div class="sec-head reveal">
+      <div class="row1"><span class="num">01</span><span class="eyebrow" data-i18n="k3">Menú del día · de lunes a viernes</span></div>
+      <h2 data-i18n="h2b">Tres platos elegidos por ti, <em>por menos de trece euros</em>.</h2>
+      <p class="lead" data-i18n="lead2">Solo mediodía, de 12:00 a 16:00, de lunes a viernes — salvo festivos. Bebida y postre incluidos en ambos menús.</p>
+    </div>
+
+    <div class="menu-cards">
+      <article class="card reveal">
+        <span class="tag" data-i18n="cardA">Menú del día · A</span>
+        <div class="price"><sup>€</sup>10,95</div>
+        <div class="dgrupo"><h4 data-i18n="g1">Primero · a elegir</h4><p data-i18n="g1p">Sopa agripicante · Sopa de pollo con maíz · Ensalada de la casa · Ensalada china · Rollito de primavera · Rollo de la casa</p></div>
+        <div class="dgrupo"><h4 data-i18n="g2">Segundo · a elegir</h4><p data-i18n="g2p">Arroz tres delicias · Arroz con huevo · Arroz blanco · Arroz especial · Tallarines con verduras · Pan japonés</p></div>
+        <div class="dgrupo"><h4 data-i18n="g3">Tercero · a elegir</h4><p data-i18n="g3p">Pollo con salsa picante · Pollo con almendras · Pollo agridulce · Pollo con limón · Buey con champiñones · Buey con cebolla · Buey con salsa de ostras · Verduras mixtas</p></div>
+        <div class="dgrupo"><h4 data-i18n="g4">Bebida</h4><p data-i18n="g4p">Agua, refresco, caña o copa de vino</p></div>
+        <div class="dgrupo"><h4 data-i18n="g5">Postre</h4><p data-i18n="g5p">Bola de helado, flan, café o té</p></div>
+      </article>
+
+      <article class="card reveal">
+        <span class="tag" data-i18n="cardB">Menú del día · B</span>
+        <div class="price"><sup>€</sup>12,50</div>
+        <div class="dgrupo"><h4 data-i18n="h1g">Primero · a elegir</h4><p data-i18n="h1gp">Sopa de maíz con cangrejo · Sopa miso · Ensalada tailandesa · Ensalada de algas · Rollito de pato · Rollo japonés</p></div>
+        <div class="dgrupo"><h4 data-i18n="g2">Segundo · a elegir</h4><p data-i18n="h2gp">Arroz Yang Zhou · Arroz blanco · Tallarines fritos · Tallarines japoneses · Fideos de arroz fritos</p></div>
+        <div class="dgrupo"><h4 data-i18n="g3">Tercero · a elegir</h4><p data-i18n="h3gp">Pollo Gong Bao · Pollo con salsa de curry · Pollo con bambú y setas chinas · Buey con salsa de curry · Buey con salsa picante · Buey japonés · Gambas con salsa picante · Gambas con verduras · Pato Pekín · Verduras mixtas</p></div>
+        <div class="dgrupo"><h4 data-i18n="g4">Bebida</h4><p data-i18n="g4p">Agua, refresco, caña o copa de vino</p></div>
+        <div class="dgrupo"><h4 data-i18n="g5">Postre</h4><p data-i18n="g5p">Bola de helado, flan, café o té</p></div>
+      </article>
+    </div>
+
+    <p class="cardnote reveal" data-i18n="cardnote">※ Platos tomados de las cartas de menú del día publicadas por el propio restaurante. Confirmar disponibilidad diaria al reservar. Salvo festivos.</p>
+  </div>
+</section>
+
+<section id="local" data-od-id="el-local">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="row1"><span class="num">02</span><span class="eyebrow" data-i18n="k6">El local</span></div>
+      <h2 data-i18n="h2d">Madera, lámparas doradas <em>y palmeras</em> frente al mar.</h2>
+      <p class="lead" data-i18n="lead3">Tres salones con techo de madera a la vista, lámparas cálidas y la terraza abierta a la playa de Levante.</p>
+    </div>
+    <div class="gal">
+      <figure class="reveal"><img src="assets/fachada.jpg" alt="Fachada de Home Sushi en C. Ibiza 9, Benidorm"><figcaption data-i18n="g1" style="text-shadow:0 1px 8px rgba(26,22,15,.9)">El restaurante · C. Ibiza 9</figcaption></figure>
+      <figure class="reveal"><img src="assets/terraza.jpg" alt="Salón ventana a la palmera"><figcaption data-i18n="g2">Ventana al jardín</figcaption></figure>
+      <figure class="reveal"><img src="assets/sala-oriental.jpg" alt="Sala con decoración oriental y manteles rojos"><figcaption data-i18n="g3">La sala oriental</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" style="padding-top:0" data-od-id="contacto">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="row1"><span class="num">03</span><span class="eyebrow" data-i18n="k7">Contacto y reservas</span></div>
+      <h2 data-i18n="h2f">Te esperamos en C. Ibiza&nbsp;9.</h2>
+    </div>
+    <div class="ct">
+      <div class="ct-rows reveal">
+        <div class="row"><b data-i18n="c1">Dirección</b><span>C. Ibiza 9, 03503 Benidorm, Alicante<br><a href="https://maps.google.com/maps?q=Calle+Ibiza+9,+03503+Benidorm" target="_blank" rel="noopener" style="text-decoration:underline" data-i18n="c1l">Cómo llegar →</a></span></div>
+        <div class="row"><b data-i18n="c2">Horario</b><span data-i18n="c2v">Todos los días · 12:00–16:00 y 18:00–00:00</span></div>
+        <div class="row"><b data-i18n="c3">Menú del día</b><span data-i18n="c3v">Lunes a viernes, mediodía (12:00–16:00). Salvo festivos.</span></div>
+        <div class="row"><b data-i18n="c4">Teléfono</b><a href="tel:+34622258858" style="font-family:var(--disp);font-size:24px">622 25 88 58</a></div>
+        <div class="wc">
+          <a href="https://www.facebook.com/homesushibenidorm" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6c-.3-.04-1.3-.13-2.45-.13-2.4 0-4.05 1.47-4.05 4.17v2.33H7.5V13h2.7v8h3.3z"/></svg></a>
+          <span data-i18n="follow">Síguenos para promociones</span>
+          <a href="https://instagram.com/restaurantehomesushi_benidorm" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3.5" y="3.5" width="17" height="17"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r=".8" fill="currentColor" stroke="none"/></svg></a>
+        </div>
+      </div>
+      <div class="map reveal">
+        <div id="map" role="application" aria-label="Mapa de Home Sushi Benidorm"></div>
+        <div class="map-chip"><b>C. Ibiza 9</b> · Benidorm</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="closing">
+  <p class="q reveal" data-i18n="close">La cena japonesa de siempre, recién hecha, a dos calles del paseo.</p>
+  <div class="reveal"><a class="btn btn-gold" href="tel:+34622258858" data-reserva data-i18n="book3">Reservar mesa</a></div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© HOME SUSHI BENIDORM · <a href="#" data-i18n="flegal">Aviso legal</a> · <a href="#" data-i18n="fpriv">Privacidad</a></span>
+    <div class="fsoc">
+      <a href="https://www.facebook.com/homesushibenidorm" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6c-.3-.04-1.3-.13-2.45-.13-2.4 0-4.05 1.47-4.05 4.17v2.33H7.5V13h2.7v8h3.3z"/></svg></a>
+      <a href="https://instagram.com/restaurantehomesushi_benidorm" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3.5" y="3.5" width="17" height="17"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r=".8" fill="currentColor" stroke="none"/></svg></a>
+    </div>
+    <span data-i18n="fnote">Datos e imágenes tomados de la web y publicaciones oficiales del restaurante.</span>
+  </div>
+</footer>
+
+<script src="assets/leaflet/leaflet.js"></script>
+<script>
+if(document.getElementById('map')){
+  const mk=L.map('map',{zoomControl:false,scrollWheelZoom:false,attributionControl:true}).setView([38.53991,-0.11811],17);
+  L.control.zoom({position:'bottomright'}).addTo(mk);
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{
+    attribution:'&copy; Esri · OpenStreetMap contributors',
+    maxZoom:19
+  }).addTo(mk);
+  L.marker([38.53991,-0.11811],{icon:L.divIcon({
+    className:'hs-pin',
+    html:'<svg xmlns="http://www.w3.org/2000/svg" width="34" height="46" viewBox="0 0 34 46"><path d="M17 1C8.16 1 1 8.16 1 17c0 12.1 16 28 16 28s16-15.9 16-28C33 8.16 25.84 1 17 1z" fill="#a8842e" stroke="#8c6e23" stroke-width="1"/><circle cx="17" cy="17" r="6" fill="#faf7ef"/></svg>',
+    iconSize:[34,46],iconAnchor:[17,44]
+  })}).addTo(mk);
+}
+</script>
+<script>
+const I18N={
+en:{n2:"Lunch set",n4:"The venue",n5:"Contact",book:"Book",
+k1:"Japanese restaurant · all-you-can-eat à la carte · Benidorm",
+h1:"Japanese all-you-can-eat <em>à la carte</em>, 200 metres from the beach.",
+sub:"At C. Ibiza 9, next to Levante beach: traditional Japanese and Chinese cuisine with teppanyaki, ordered in rounds from your table and served freshly made. Lunch and dinner, every day.",
+book2:"Book a table",menu:"Lunch set",
+buffetH:'Buffet libre <em>menu</em>',buffetBtn:'View buffet menu',
+h1a:"Lunchtime",h1b:"Evening",h1c:"Days",h1d:"Every day",h1e:"Phone",
+c1:"The dining room · C. Ibiza 9, Benidorm",
+k3:"Lunch set · monday to friday",h2b:"Three courses chosen from, <em>for under thirteen euros</em>.",lead2:"Lunchtime only, 12:00 to 16:00, Monday to Friday — except bank holidays. Drink and dessert included in both menus.",
+cardA:"Lunch set · A",cardB:"Lunch set · B",
+g1:"First course · choose one",g1p:"Hot-and-sour soup · Chicken and sweetcorn soup · House salad · Chinese salad · Spring roll · House roll",
+g2:"Second course · choose one",g2p:"Three-treasures fried rice · Egg rice · Plain rice · Special rice · Vegetables noodles · Japanese bun",
+g3:"Third course · choose one",g3p:"Spicy chicken · Chicken with almonds · Sweet-and-sour chicken · Lemon chicken · Beef with mushrooms · Beef with onions · Beef with oyster sauce · Mixed vegetables",
+g4:"Drink",g4p:"Water, soft drink, small beer or glass of wine",g5:"Dessert",g5p:"Scoop of ice cream, crème caramel, coffee or tea",
+h1gp:"Corn soup with crab · Miso soup · Thai salad · Seaweed salad · Duck roll · Japanese roll",
+h2gp:"Yang Zhou fried rice · Plain rice · Fried noodles · Japanese noodles · Fried rice noodles",
+h3gp:"Gong Bao chicken · Chicken in curry sauce · Chicken with bamboo and Chinese mushrooms · Beef in curry sauce · Spicy beef · Japanese beef · Spicy prawns · Prawns with vegetables · Peking duck · Mixed vegetables",
+cardnote:"※ Dishes taken from the lunch-set menus published by the restaurant itself. Confirm daily availability when booking. Excluding bank holidays.",
+k6:"The venue",h2d:"Wood, golden lamps <em>and palm trees</em> over the sea.",lead3:"Three dining rooms with exposed timber ceilings, warm lighting and a room opening onto Levante beach.",
+g1:"The restaurant · C. Ibiza 9",g2:"Garden-facing room",g3:"The oriental room",
+k7:"Contact & bookings",h2f:"We're waiting for you at C. Ibiza&nbsp;9.",
+c1:"Address",c1l:"How to arrive →",c2:"Opening hours",c2v:"Every day · 12:00–16:00 and 18:00–00:00",c3:"Lunch set",c3v:"Monday to Friday, lunchtime (12:00–16:00). Except bank holidays.",c4:"Phone",
+follow:"Follow us for promos",
+close:"The Japanese dinner you know, freshly made, two streets from the promenade.",book3:"Book a table",
+flegal:"Legal notice",fpriv:"Privacy",fnote:"Data and images taken from the restaurant's official website and publications."},
+es:{}};
+let lang='es';
+const langBtn=document.getElementById('langBtn');
+const stEl=document.getElementById('openState');
+document.querySelectorAll('[data-i18n]').forEach(el=>{el._es=el.innerHTML;});
+function openState(){
+  const h=new Date();const t=h.getHours()+h.getMinutes()/60;const en=lang==='en';
+  if(t<12||t>=24)return en?'Opens today at 12:00':'Abrimos hoy a las 12:00';
+  if(t<16)return en?'Open now · closes at 16:00':'Abierto ahora · cerramos a las 16:00';
+  if(t<18)return en?'Reopens at 18:00':'Volvemos a las 18:00';
+  return en?'Open now · closes at 00:00':'Abierto ahora · cerramos a las 00:00';
+}
+function stateText(){if(stEl)stEl.textContent=openState();}
+function apply(){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    if(el===stEl)return;
+    const k=el.dataset.i18n;
+    if(lang==='en'){const t=I18N.en[k];if(t!==undefined)el.innerHTML=t;}
+    else if(el._es!==undefined)el.innerHTML=el._es;
+  });
+  const bb=document.getElementById('buffetBtn');
+  if(bb)bb.href=lang==='en'?'menu-buffet-en.pdf':'menu-buffet-es.pdf';
+  stateText();
+}
+function setLang(l){lang=l;
+  langBtn.classList.toggle('en',l==='en');
+  langBtn.setAttribute('aria-checked',l==='en');
+  langBtn.setAttribute('aria-label',l==='es'?'Cambiar idioma a inglés':'Switch language to Spanish');
+  document.documentElement.lang=l;apply();
+}
+langBtn.addEventListener('click',()=>setLang(lang==='es'?'en':'es'));
+const nav=document.getElementById('nav'),yr=()=>nav.classList.toggle('scrolled',scrollY>56);window.addEventListener('scroll',yr,{passive:true});yr();
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}}),{threshold:.06});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6)*70+'ms';obs.observe(el);});
+setTimeout(()=>document.querySelectorAll('.reveal:not(.in)').forEach(el=>el.classList.add('in')),700);
+const burger=document.getElementById('burger');burger.addEventListener('click',()=>nav.classList.toggle('open'));
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+stateText();setInterval(stateText,60000);
+</script>
+<script src="assets/reservas.js"></script>
+</body>
+</html>
