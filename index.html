@@ -223,6 +223,8 @@ html.js .reveal.in{opacity:1;transform:none}
   .trio .c + .c{padding-left:0;border-left:none}
   .card{padding:36px 28px}
   .plates img{width:180px;height:180px}
+  .ct{gap:36px}
+  .gal img{aspect-ratio:4/3}
 }
 @media(max-width:560px){
   .lang-sw{width:76px;height:30px}
@@ -233,9 +235,26 @@ html.js .reveal.in{opacity:1;transform:none}
   .cat-grid{grid-template-columns:1fr}
   .gal{grid-template-columns:1fr}
   .band{height:52vh}
-  .brand{font-size:11px;letter-spacing:.2em}
-  .actic{gap:10px}
   .btn{padding:11px 16px}
+  /* barra superior: solo el logo, para que quepan idioma, Reservar y menú */
+  .wrap{padding:0 20px}
+  .brand{font-size:0;gap:0}
+  .actic{gap:8px}
+  nav .btn{padding:10px 12px;font-size:10px;letter-spacing:.14em}
+  .burger{padding:8px 4px}
+  .hero{padding:64px 0}
+  .hero h1{font-size:44px}
+  .hero-cols{margin-top:44px;gap:44px}
+  .band figcaption{left:20px;right:20px}
+  .map{min-height:340px}
+  .closing{padding:84px 20px}
+}
+@media(max-width:360px){
+  .wrap{padding:0 14px}
+  .actic{gap:6px}
+  .brand .mark{height:22px;padding:3px 4px}
+  nav .btn{padding:9px 9px;letter-spacing:.1em}
+  .hero h1{font-size:38px}
 }
 </style>
 </head>
